@@ -1,7 +1,7 @@
 {
   "title": "Pined Tab Fix",
   "name": "pined_tab_fix",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Opens tabs opened from a pined tab on the far right end of the tab bar.",
   "main": "index.js",
   "author": "Nils Albrecht(nralbrecht)",
@@ -12,5 +12,13 @@
   "license": "MIT",
   "keywords": [
     "tabs", "pined", "open", "next"
+  ],
+  "preferences": [
+    {
+      "name": "openInForground",
+      "type": "bool",
+      "value": false,
+      "title": "Open tabs in forground"
+    }
   ]
 }

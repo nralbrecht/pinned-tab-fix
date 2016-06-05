@@ -1,5 +1,6 @@
 let tabs = require('sdk/tabs');
 let utils = require("sdk/tabs/utils");
+var options = require("sdk/simple-prefs");
 let { viewFor } = require("sdk/view/core");
 
 let lastActiveTab = null;
@@ -21,7 +22,9 @@ tabs.on('open', function onOpen(tab){
 
       let tempTab = lastActiveTab;
       tab.activate();
-      tempTab.activate();
+      if (!options.prefs.openInForground) {
+        tempTab.activate();
+      }
     }
   }
 });
