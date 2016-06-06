@@ -1,6 +1,6 @@
 let tabs = require('sdk/tabs');
 let utils = require("sdk/tabs/utils");
-var options = require("sdk/simple-prefs");
+let options = require("sdk/simple-prefs");
 let { viewFor } = require("sdk/view/core");
 
 let lastActiveTab = null;
@@ -22,7 +22,7 @@ tabs.on('open', function onOpen(tab){
 
       let tempTab = lastActiveTab;
       tab.activate();
-      if (!options.prefs.openInForground) {
+      if (!(options.prefs.openInForground || lowLevelTab.getAttribute("label") === "Neuer Tab")) {
         tempTab.activate();
       }
     }
