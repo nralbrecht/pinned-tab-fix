@@ -1,7 +1,7 @@
 {
   "title": "Pined Tab Fix",
   "name": "pined_tab_fix",
-  "version": "1.1.0",
+  "version": "1.1.3",
   "description": "Opens tabs opened from a pined tab on the far right end of the tab bar.",
   "main": "index.js",
   "author": "Nils Albrecht(nralbrecht)",
