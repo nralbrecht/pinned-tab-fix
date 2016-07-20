@@ -1,5 +1,4 @@
 let utils = require("sdk/tabs/utils");
-let options = require("sdk/simple-prefs");
 let { viewFor } = require("sdk/view/core");
 let windows = require('sdk/windows').browserWindows;
 
@@ -26,7 +25,7 @@ function onWindowOpen(window) {
 
       let tempTabIndex = lastActiveTabIndex;
       tab.activate();
-      if (!(options.prefs.openInForground || lowLevelTab.getAttribute("label") === "Neuer Tab")) {
+      if (require("sdk/preferences/service").get("browser.tabs.loadInBackground", true) || lowLevelTab.getAttribute("label") === "Neuer Tab") {
         window.tabs[tempTabIndex].activate();
       }
     }
