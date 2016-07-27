@@ -23,10 +23,9 @@ function onWindowOpen(window) {
 
       lowLevelBrowser.addProgressListener(progressEventHandler);
 
-      let tempTabIndex = lastActiveTabIndex;
       tab.activate();
-      if (require("sdk/preferences/service").get("browser.tabs.loadInBackground", true) || lowLevelTab.getAttribute("label") === "Neuer Tab") {
-        window.tabs[tempTabIndex].activate();
+      if ((tab.url !== 'about:newtab') && require('sdk/preferences/service').get('browser.tabs.loadInBackground', true)) {
+        window.tabs[lastActiveTabIndex].activate();
       }
     }
   });
