@@ -1,19 +1,24 @@
 {
-  "title": "Pined Tab Fix",
-  "name": "pined_tab_fix",
-  "description": "Opens tabs opened from a pined tab on the far right end of the tab bar.",
-  "main": "index.js",
+  "name": "pinned_tab_fix",
+  "description": "This is a Firefox add-on that appends new tabs opened from a pinned tab to the right end of the tab bar.",
   "version": "1.2.2",
   "author": "Nils Albrecht(nralbrecht)",
   "engines": {
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
-  "license": "MIT",
   "keywords": [
     "tabs", "pined", "open", "next"
   ],
+  "license": "MIT",
+  "locales": {
+      "de": {
+          "description": "Verschiebt die aus einem angehefteten Tab geöffneten Tabs an den rechten Rand der Tableiste."
+      }
+  },
+  "main": "index.js",
   "permissions": {
     "private-browsing": true
-  }
+  },
+  "title": "Pinned Tab Fix"
 }
