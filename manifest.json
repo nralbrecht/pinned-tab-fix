@@ -6,6 +6,7 @@
 
   "description": "This is a Firefox add-on that appends new tabs opened from a pinned tab to the right end of the tab bar.",
   "homepage_url": "https://github.com/nralbrecht/pinned-tab-fix",
+  "default_locale": "en",
 
   "background": {
     "scripts": ["background-script.js"]
