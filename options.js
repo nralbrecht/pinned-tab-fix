@@ -11,3 +11,6 @@ checkbox.addEventListener("click", function(e) {
 		"loadInBackground": !e.target.checked
 	});
 });
+
+document.getElementsByClassName('preferences-title')[0].innerText = chrome.i18n.getMessage("loadInBackgroundName");
+document.getElementsByClassName('preferences-description')[0].innerText = chrome.i18n.getMessage("loadInBackgroundDescription");

@@ -2,5 +2,13 @@
 	"extensionDescription": {
 		"message": "Opens tabs opened from a pinned tab on the far right end of the tab bar.",
 		"description": "Description of the extension."
+	},
+	"loadInBackgroundName": {
+		"message": "Open tabs in forground",
+		"description": "Name of the loadInBackground option"
+	},
+	"loadInBackgroundDescription": {
+		"message": "When activated, all tabs affected by this add-on will be opend in the forground. This option replaces the global preference for said tabs.",
+		"description": "Description of the loadInBackground option"
 	}
 }
