@@ -25,7 +25,7 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 
 chrome.tabs.onCreated.addListener(function(tab) {
 	chrome.tabs.get(lastActiveTabId, function(lastActiveTab) {
-		if (lastActiveTab.pinned) {
+		if (lastActiveTab.pinned || lastActiveTabId === tab.id) {
 			chrome.tabs.move(tab.id, {
 				index: -1
 			}, function() {
