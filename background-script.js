@@ -1,4 +1,8 @@
-let lastActiveTabId = 0;
+let lastActiveTab = {
+	"id": 0,
+	"pinned": false
+};
+let secondToLastTab = lastActiveTab;
 let loadInBackground = true;
 
 chrome.storage.local.get("loadInBackground", function(res) {
@@ -20,21 +24,25 @@ chrome.storage.onChanged.addListener(function(changes) {
 });
 
 chrome.tabs.onActivated.addListener(function(activeInfo) {
-	lastActiveTabId = activeInfo.tabId;
+	chrome.tabs.get(activeInfo.tabId, function(activeTab) {
+		secondToLastTab = lastActiveTab;
+		lastActiveTab = {
+			"id": activeInfo.tabId,
+			"pinned": activeTab.pinned
+		};
+	});
 });
 
 chrome.tabs.onCreated.addListener(function(tab) {
-	chrome.tabs.get(lastActiveTabId, function(lastActiveTab) {
-		if (lastActiveTab.pinned || lastActiveTabId === tab.id) {
-			chrome.tabs.move(tab.id, {
-				index: -1
-			}, function() {
-				if (loadInBackground) {
-					chrome.tabs.update(lastActiveTab.id, { active: true });
-				} else {
-					chrome.tabs.update(tab.id, { active: true });
-				}
-			});
-		}
-	});
+	if (lastActiveTab.pinned || (secondToLastTab.pinned && lastActiveTab.id === tab.id)) {
+		chrome.tabs.move(tab.id, {
+			index: -1
+		}, function() {
+			if (loadInBackground) {
+				chrome.tabs.update(lastActiveTab.id, { active: true });
+			} else {
+				chrome.tabs.update(tab.id, { active: true });
+			}
+		});
+	}
 });
