@@ -38,10 +38,10 @@ chrome.tabs.onCreated.addListener(function(tab) {
 		chrome.tabs.move(tab.id, {
 			index: -1
 		}, function() {
+			chrome.tabs.update(tab.id, { active: true });
+
 			if (loadInBackground) {
 				chrome.tabs.update(lastActiveTab.id, { active: true });
-			} else {
-				chrome.tabs.update(tab.id, { active: true });
 			}
 		});
 	}
