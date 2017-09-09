@@ -2,14 +2,13 @@ let lastActiveTab = {
 	"id": 0,
 	"pinned": false
 };
-let secondToLastTab = lastActiveTab;
 let loadInBackground = true;
 
-chrome.storage.local.get("loadInBackground", function(res) {
+browser.storage.local.get("loadInBackground", function(res) {
 	if (res.loadInBackground === undefined) {
 		loadInBackground = true;
 
-		chrome.storage.local.set({
+		browser.storage.local.set({
 			"loadInBackground": true
 		});
 	} else {
@@ -17,31 +16,38 @@ chrome.storage.local.get("loadInBackground", function(res) {
 	}
 });
 
-chrome.storage.onChanged.addListener(function(changes) {
+browser.storage.onChanged.addListener(function(changes) {
 	if (changes["loadInBackground"]) {
 		loadInBackground = changes["loadInBackground"].newValue;
 	}
 });
 
-chrome.tabs.onActivated.addListener(function(activeInfo) {
-	chrome.tabs.get(activeInfo.tabId, function(activeTab) {
-		secondToLastTab = lastActiveTab;
+browser.tabs.onActivated.addListener(function(activeInfo) {
+	browser.tabs.get(activeInfo.tabId, function(activeTab) {
 		lastActiveTab = {
-			"id": activeInfo.tabId,
+			"id": activeTab.id,
 			"pinned": activeTab.pinned
 		};
 	});
 });
 
-chrome.tabs.onCreated.addListener(function(tab) {
-	if (lastActiveTab.pinned || (secondToLastTab.pinned && lastActiveTab.id === tab.id)) {
-		chrome.tabs.move(tab.id, {
-			index: -1
-		}, function() {
-			chrome.tabs.update(tab.id, { active: true });
-
-			if (loadInBackground) {
-				chrome.tabs.update(lastActiveTab.id, { active: true });
+browser.tabs.onCreated.addListener(function(tab) {
+	if (lastActiveTab.pinned) {
+		browser.tabs.query({
+			windowId: tab.windowId
+		}, function(tabs) {
+			// check if tab was opened from outside of firefox or is about:newtab
+			if (tab.index != tabs.length - 1) {
+				browser.tabs.move(tab.id, {
+					index: -1
+				}, function() {
+					// in all cases scroll tab bar to the right
+					browser.tabs.update(tab.id, { active: true });
+					
+					if (loadInBackground) {
+						browser.tabs.update(lastActiveTab.id, { active: true });
+					}
+				});
 			}
 		});
 	}
