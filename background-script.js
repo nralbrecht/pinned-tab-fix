@@ -23,7 +23,7 @@ browser.storage.onChanged.addListener(function(changes) {
 });
 
 browser.tabs.onActivated.addListener(function(activeInfo) {
-	browser.tabs.get(activeInfo.tabId, function(activeTab) {
+	browser.tabs.get(activeInfo.tabId).then(function(activeTab) {
 		lastActiveTab = {
 			"id": activeTab.id,
 			"pinned": activeTab.pinned
@@ -35,19 +35,21 @@ browser.tabs.onCreated.addListener(function(tab) {
 	if (lastActiveTab.pinned) {
 		browser.tabs.query({
 			windowId: tab.windowId
-		}, function(tabs) {
+		})
+		.then(function(tabs) {
 			// check if tab was opened from outside of firefox or is about:newtab
 			if (tab.index != tabs.length - 1) {
-				browser.tabs.move(tab.id, {
+				return browser.tabs.move(tab.id, {
 					index: -1
-				}, function() {
-					// in all cases scroll tab bar to the right
-					browser.tabs.update(tab.id, { active: true });
-					
-					if (loadInBackground) {
-						browser.tabs.update(lastActiveTab.id, { active: true });
-					}
 				});
+			}
+		})
+		.then(function() {
+			// in all cases scroll tab bar to the right
+			browser.tabs.update(tab.id, { active: true });
+			
+			if (loadInBackground) {
+				browser.tabs.update(lastActiveTab.id, { active: true });
 			}
 		});
 	}
