@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Pinned Tab Fix",
-  "version": "2.2.0",
+  "version": "2.2.1",
 
   "description": "__MSG_extensionDescription__",
   "homepage_url": "https://github.com/nralbrecht/pinned-tab-fix",
@@ -17,7 +17,8 @@
   },
 
   "permissions": [
-    "storage"
+    "storage",
+    "tabs"
   ]
 
 }

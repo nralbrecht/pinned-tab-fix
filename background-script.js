@@ -37,12 +37,14 @@ browser.tabs.onCreated.addListener(function(tab) {
 			windowId: tab.windowId
 		})
 		.then(function(tabs) {
-			// check if tab was opened from outside of firefox or is about:newtab
-			if (tab.index != tabs.length - 1) {
-				return browser.tabs.move(tab.id, {
-					index: -1
-				});
-			}
+			return browser.tabs.get(tab.id).then(function(tabInfo) {
+				// check if tab was opened from outside of firefox or is about:newtab
+				if (tab.url != "about:newtab" || tab.index != tabs.length - 1) {
+					return browser.tabs.move(tab.id, {
+						index: -1
+					});
+				}
+			})
 		})
 		.then(function() {
 			// in all cases scroll tab bar to the right
