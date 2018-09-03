@@ -38,8 +38,12 @@ browser.tabs.onCreated.addListener(function(tab) {
 		})
 		.then(function(tabs) {
 			return browser.tabs.get(tab.id).then(function(tabInfo) {
-				// check if tab was opened from outside of firefox or is about:newtab
-				if (tab.url != "about:newtab" || tab.index != tabs.length - 1) {
+				// don't move these tabs
+				let newTab = tab.url != "about:newtab"; // new tab
+				let rightEnd = tab.index != tabs.length - 1; // already at the right
+				let lastClosed = tab.url == "about:blank" && tab.favIconUrl // undo close tab
+
+				if (!lastClosed || !newTab || !rightEnd) {
 					return browser.tabs.move(tab.id, {
 						index: -1
 					});
