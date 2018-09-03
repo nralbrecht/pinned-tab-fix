@@ -13,7 +13,7 @@
       "id": "@pined_tab_fix",
       "strict_min_version": "48.0"
     }
-  }
+  },
 
   "icons": {
     "48": "icon.svg",
