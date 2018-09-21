@@ -10,6 +10,9 @@ This add-on adds the functions described in [this bug discussion](https://bugzil
 Due to limitations in the implementation of Add-on in Firefox you may see the tabbar scrolling from left to right. Depending on your settings you may also see flashing of the current page when opening a new Tab.
 
 ## Changelog
+### [v2.2.4] (Firefox 48.0 - *)
+- Check if a tab was opened via "undo close tab" also in Firefox 52 ESR
+
 ### [v2.2.3] (Firefox 48.0 - *)
 - Check if a tab was opened via "undo close tab"
 
@@ -62,6 +65,7 @@ Due to limitations in the implementation of Add-on in Firefox you may see the ta
 - Open new and external links in foreground
 - Add compatibility for multiple windows
 
+[v2.2.4]: https://github.com/nralbrecht/pinned-tab-fix/releases/tag/v2.2.4
 [v2.2.3]: https://github.com/nralbrecht/pinned-tab-fix/releases/tag/v2.2.3
 [v2.2.2]: https://github.com/nralbrecht/pinned-tab-fix/releases/tag/v2.2.2
 [v2.2.1]: https://github.com/nralbrecht/pinned-tab-fix/releases/tag/v2.2.1
