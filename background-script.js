@@ -34,28 +34,22 @@ browser.tabs.onActivated.addListener(function(activeInfo) {
 browser.tabs.onCreated.addListener(function(tab) {
 	if (lastActiveTab.pinned) {
 		browser.tabs.query({
-			windowId: tab.windowId
+			"currentWindow": true,
+			"pinned": true
 		})
 		.then(function(tabs) {
-			return browser.tabs.get(tab.id).then(function(tabInfo) {
-				// don't move these tabs
-				let newTab = tab.url == "about:newtab"; // new tab
-				let rightEnd = tab.index == tabs.length - 1; // opened from outside of firefox
-				let lastClosed = tab.url == "about:blank" && (!!tab.favIconUrl || !!tab.highlighted) // undo close tab
+			if (tab.index == tabs.length) {
+				browser.tabs.move(tab.id, {
+					index: -1
+				})
+				.then(function() {
+					// in all cases scroll tab bar to the right
+					browser.tabs.update(tab.id, { active: true });
 
-				if (!lastClosed && !newTab && !rightEnd) {
-					return browser.tabs.move(tab.id, {
-						index: -1
-					});
-				}
-			})
-		})
-		.then(function() {
-			// in all cases scroll tab bar to the right
-			browser.tabs.update(tab.id, { active: true });
-			
-			if (loadInBackground) {
-				browser.tabs.update(lastActiveTab.id, { active: true });
+					if (loadInBackground) {
+						browser.tabs.update(lastActiveTab.id, { active: true });
+					}
+				});
 			}
 		});
 	}
