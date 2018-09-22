@@ -4,7 +4,7 @@ let lastActiveTab = {
 };
 let loadInBackground = true;
 
-browser.storage.local.get("loadInBackground", function(res) {
+browser.storage.local.get("loadInBackground").then(function(res) {
 	if (res.loadInBackground === undefined) {
 		loadInBackground = true;
 
