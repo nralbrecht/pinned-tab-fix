@@ -5,8 +5,9 @@ html, body {
 }
 .setting {
 	font-size: 1rem;
-	border-top: 2px solid;
-	-moz-border-top-colors: rgba(28, 31, 37, 0.1) rgba(255, 255, 255, 0.1);
+	border-top: 1px solid #d7d7db;
+	padding-left: 6px;
+	padding-top: 1px;
 	min-height: 30px;
 	width: 100%;
 }
@@ -18,14 +19,14 @@ html, body {
 	cursor: default;
 	margin-top: 1px;
 	margin-bottom: 2px;
-	-moz-margin-start: 6px;
-	-moz-margin-end: 5px;
+	margin-start: 6px;
+	margin-end: 5px;
 }
 .preferences-description {
 	font-size: .9rem;
 	color: #6D6D6D;
 	margin-top: -2px;
-	-moz-margin-start: 2em;
+	margin-start: 2em;
 	white-space: pre-wrap;
 }
 .preferences-input {
@@ -33,11 +34,11 @@ html, body {
 	width: 60%;
 }
 .preferences-input input {
-	-moz-box-align: center;
+	box-align: center;
 	margin: 2px 4px;
 	margin-left: 0;
 	padding-top: 1px;
 	padding-bottom: 1px;
-	-moz-padding-start: 4px;
-	-moz-padding-end: 2px;
+	padding-start: 4px;
+	padding-end: 2px;
 }
