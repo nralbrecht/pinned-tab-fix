@@ -24,10 +24,12 @@ browser.storage.onChanged.addListener(function(changes) {
 
 browser.tabs.onActivated.addListener(function(activeInfo) {
 	browser.tabs.get(activeInfo.tabId).then(function(activeTab) {
-		lastActiveTab = {
-			"id": activeTab.id,
-			"pinned": activeTab.pinned
-		};
+		if (activeTab.status == "complete") {
+			lastActiveTab = {
+				"id": activeTab.id,
+				"pinned": activeTab.pinned
+			};
+		}
 	});
 });
 
