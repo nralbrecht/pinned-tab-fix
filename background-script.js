@@ -40,7 +40,7 @@ browser.tabs.onCreated.addListener(function(tab) {
 			"pinned": true
 		})
 		.then(function(tabs) {
-			if (tab.index == tabs.length) {
+			if (tab.index == tabs.length || tab.index == tabs.length + 1) {
 				browser.tabs.move(tab.id, {
 					index: -1
 				})
