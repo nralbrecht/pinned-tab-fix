@@ -4,11 +4,11 @@
 		"description": "Description of the extension."
 	},
 	"loadInBackgroundName": {
-		"message": "Open tabs in forground",
+		"message": "Open tabs in foreground",
 		"description": "Name of the loadInBackground option"
 	},
 	"loadInBackgroundDescription": {
-		"message": "When activated, all tabs affected by this add-on will be opend in the forground. This option replaces the global preference for said tabs.",
+		"message": "When activated, all tabs affected by this add-on will be opened in foreground. This option replaces the global preference for said tabs.",
 		"description": "Description of the loadInBackground option"
 	}
 }
