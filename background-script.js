@@ -22,6 +22,12 @@ browser.storage.onChanged.addListener(function(changes) {
 	}
 });
 
+browser.tabs.query({active: true, currentWindow: true}).then((activeTabs) => {
+	lastActiveTab = {
+		"id": activeTabs[0].id,
+		"pinned": activeTabs[0].pinned
+	}
+});
 browser.tabs.onActivated.addListener(function(activeInfo) {
 	browser.tabs.get(activeInfo.tabId).then(function(activeTab) {
 		if (activeTab.status == "complete") {
