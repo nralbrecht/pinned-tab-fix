@@ -39,6 +39,20 @@ browser.tabs.onActivated.addListener(function(activeInfo) {
 	});
 });
 
+const onUpdatedEventFilter = {
+	"properties": [
+		"pinned"
+	]
+};
+browser.tabs.onUpdated.addListener(function(_, _, updatedTab) {
+	if (updatedTab.active && updatedTab.pinned && updatedTab.status === "complete") {
+		lastActiveTab = {
+			"id": updatedTab.id,
+			"pinned": updatedTab.pinned
+		};
+	}
+}, onUpdatedEventFilter);
+
 browser.tabs.onCreated.addListener(function(tab) {
 	if (lastActiveTab.pinned) {
 		browser.tabs.query({
