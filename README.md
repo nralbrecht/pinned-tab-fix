@@ -7,9 +7,15 @@ Tabs that are opened from a pinned one are opened at the far left of the tab bar
 This add-on adds the functions described in [this bug discussion](https://bugzilla.mozilla.org/show_bug.cgi?id=970102).
 
 ##### Known Issues:
-Due to limitations in the implementation of Add-on in Firefox you may see the tabbar scrolling from left to right. Depending on your settings you may also see flashing of the current page when opening a new Tab.
+Due to limitations in the implementation of Add-ons in Firefox you may see the tabbar scrolling from left to right. Depending on your settings you may also see flashing of the current page when opening a new Tab.
 
 ## Changelog
+### [v2.4.0] (Firefox 61.0 - *)
+- #10 Tab containers support thanks to @Exagone313
+- Handle tab handling when using multiple windows
+- Initialize active tab correctly when starting Firefox
+- Handle pinning of the focused tab
+
 ### [v2.3.1] (Firefox 48.0 - *)
 - Remove "tabs" permission
 
@@ -69,6 +75,7 @@ Due to limitations in the implementation of Add-on in Firefox you may see the ta
 - Open new and external links in foreground
 - Add compatibility for multiple windows
 
+[v2.4.0]: https://github.com/nralbrecht/pinned-tab-fix/releases/tag/v2.4.0
 [v2.3.1]: https://github.com/nralbrecht/pinned-tab-fix/releases/tag/v2.3.1
 [v2.3.0]: https://github.com/nralbrecht/pinned-tab-fix/releases/tag/v2.3.0
 [v2.2.3]: https://github.com/nralbrecht/pinned-tab-fix/releases/tag/v2.2.3
