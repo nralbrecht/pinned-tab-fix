@@ -22,14 +22,36 @@ browser.storage.onChanged.addListener(function(changes) {
 	}
 });
 
+browser.tabs.query({active: true, currentWindow: true}).then((activeTabs) => {
+	lastActiveTab = {
+		"id": activeTabs[0].id,
+		"pinned": activeTabs[0].pinned
+	}
+});
 browser.tabs.onActivated.addListener(function(activeInfo) {
 	browser.tabs.get(activeInfo.tabId).then(function(activeTab) {
-		lastActiveTab = {
-			"id": activeTab.id,
-			"pinned": activeTab.pinned
-		};
+		if (activeTab.status == "complete") {
+			lastActiveTab = {
+				"id": activeTab.id,
+				"pinned": activeTab.pinned
+			};
+		}
 	});
 });
+
+const onUpdatedEventFilter = {
+	"properties": [
+		"pinned"
+	]
+};
+browser.tabs.onUpdated.addListener(function(_, _, updatedTab) {
+	if (updatedTab.active && updatedTab.pinned && updatedTab.status === "complete") {
+		lastActiveTab = {
+			"id": updatedTab.id,
+			"pinned": updatedTab.pinned
+		};
+	}
+}, onUpdatedEventFilter);
 
 browser.tabs.onCreated.addListener(function(tab) {
 	if (lastActiveTab.pinned) {
@@ -38,7 +60,7 @@ browser.tabs.onCreated.addListener(function(tab) {
 			"pinned": true
 		})
 		.then(function(tabs) {
-			if (tab.index == tabs.length) {
+			if (tab.index == tabs.length || tab.index == tabs.length + 1) {
 				browser.tabs.move(tab.id, {
 					index: -1
 				})
